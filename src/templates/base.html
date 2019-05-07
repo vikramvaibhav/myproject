@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base/css.html' %}
+
+    <!-- to include custom_css specific to page -->
+    {% block customcss %}{% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      {% include 'base/navbar.html' with brand_name='Boards' %}
+      {% include 'base/breadcrumb.html' %}
+      {% block content %}
+      {% endblock %}
+
+      {% include 'base/js.html' %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block customcss %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="my-3">
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Board</th>
+      <th scope="col">Post</th>
+      <th scope="col">Topic</th>
+      <th scope="col">Last Post</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for board in boards %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>
+        {{ board.name }}
+        <small class="text-muted d-block">{{ board.description }}</small>
+      </td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+</div>
+{% endblock %}
