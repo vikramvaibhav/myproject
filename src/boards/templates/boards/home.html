@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Home{% endblock %}
+{% block title %}{{ block.super }}{% endblock %}
 
 {% block customcss %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
@@ -23,7 +23,7 @@
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>
-        {{ board.name }}
+        <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
         <small class="text-muted d-block">{{ board.description }}</small>
       </td>
       <td>0</td>

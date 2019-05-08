@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Start a New Topic{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post">{% csrf_token %}
+  <div class="form-row">
+      <div class="form-group col-md-10 mx-auto">
+        {% crispy form %}
+      </div>
+  </div>
+</form>
+{% endblock %}
