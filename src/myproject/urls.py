@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from boards.views import home, board_topics, new_topic
-from accounts.views import
+from accounts.views import signup
 
 urlpatterns = [
     path('', home, name='home'),

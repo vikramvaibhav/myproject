@@ -5,21 +5,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <title>{% block title %}Boards{% endblock %}</title>
+    {% block stylesheet %}{% endblock %}
     {% include 'base/css.html' %}
-
     <!-- to include custom_css specific to page -->
     {% block customcss %}{% endblock %}
   </head>
   <body>
-    <div class="container">
-      {% include 'base/navbar.html' with brand_name='Boards' %}
-      {% include 'base/breadcrumb.html' %}
-      {% block content %}
-      {% endblock %}
-
+    {% block body %}
+      <div class="container">
+        {% include 'base/navbar.html' with brand_name='Django Boards' %}
+        <ol class="breadcrumb my-4">
+          {% block breadcrumb %}
+          {% endblock %}
+        </ol>
+        {% block content %}
+        {% endblock %}
+      </div>
       {% include 'base/js.html' %}
-    </div>
+    {% endblock body %}
   </body>
 </html>

@@ -6,6 +6,11 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 {% endblock %}
 
+{% block breadcrumb %}
+{% url 'home' as home_url %}
+<li class="breadcrumb-item {% if request.path == home_url %} active {% endif %}"><a href="{{ home_url }}">Boards</a></li>
+{% endblock %}
+
 {% block content %}
 <div class="my-3">
   <table class="table">

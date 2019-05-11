@@ -2,6 +2,13 @@
 {% load static %}
 {% block title %}{{ board.name }} - {{ block.super }}{% endblock %}
 
+{% block breadcrumb %}
+{% url 'home' as home_url %}
+{% url 'board_topics' board.pk as boardtopics %}
+<li class="breadcrumb-item {% if request.path == home_url %} active {% endif %}"><a href="{{ home_url }}">Boards</a></li>
+<li class="breadcrumb-item {% if request.path == boardtopics %} active {% endif %}"><a href="{{ boardtopics }}">{{ board.name }}</a></li>
+{% endblock %}
+
 {% block content %}
 <div class="mb-4">
   <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New Topic</a>
