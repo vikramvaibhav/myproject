@@ -140,3 +140,8 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = PROJECT_DIR.parent.child('static_cdn', 'media_root')
 MEDIA_URL = '/media/'
+
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

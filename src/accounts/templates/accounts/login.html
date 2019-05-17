@@ -1,0 +1,22 @@
+{% extends 'accounts/base_accounts.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+  <div class="col-md-6 mx-auto">
+    {% load crispy_forms_tags %}
+    <h3>Login</h3>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-primary btn-block">Login</button>
+    </form>
+    <div class="card-footer text-muted text-center">
+      New to Django Boards? <a href="{% url 'signup' %}">Sign up</a>
+    </div>
+    <div class="text-center py-2">
+      <small>
+        <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+      </small>
+    </div>
+  </div>
+{% endblock %}
