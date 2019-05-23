@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ board.name }} - {{ block.super }}{% endblock %}
-
+{% load humanize %}
 {% block breadcrumb %}
 {% url 'home' as home_url %}
 {% url 'board_topics' board.pk as boardtopics %}
@@ -25,18 +25,32 @@
       <th>Last Updated</th>
     </tr>
     <tbody>
-      {% for topic in board.topics.all %}
+      {% for topic in topics %}
+        {% url 'topic_posts' board.pk topic.pk as topic_url %}
         <tr>
-          <td>{{ topic.subject }}</td>
+          <td>
+            <p class="mb-0">
+              <a href="{{ topic_url }}">{{ topic.subject }}</a>
+            </p>
+            <small class="text-muted">
+              Pages:
+              {% for i in topic.get_page_range %}
+                <a href="{{ topic_url }}?page={{ i }}">{{ i }}</a>
+              {% endfor %}
+              {% if topic.has_many_pages %}
+              ... <a href="{{ topic_url }}?page={{ topic.get_page_count }}">Last Page</a>
+              {% endif %}
+            </small>
+          </td>
           <td>{{ topic.starter.username }}</td>
-          <td>0</td>
-          <td>0</td>
-          <td>{{ topic.last_updated }}</td>
+          <td>{{ topic.replies }}</td>
+          <td>{{ topic.views }}</td>
+          <td>{{ topic.last_updated|naturaltime }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </thead>
 </table>
 {% endif %}
-
+{% include 'snippets/pagination.html' %}
 {% endblock %}

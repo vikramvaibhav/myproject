@@ -17,20 +17,22 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views
 
-from boards.views import home, board_topics, new_topic
-from accounts.views import signup
+from boards.views import BoardListView, TopicListView, PostListView, PostUpdateView, new_topic, reply_topic
+from accounts.views import signup, UserUpdateView
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('boards/<int:pk>/', board_topics, name='board_topics'),
+    path('', BoardListView.as_view(), name='home'),
+    path('boards/<int:pk>/', TopicListView.as_view(), name='board_topics'),
     path('boards/<int:pk>/new/', new_topic, name='new_topic'),
+    path('boards/<int:pk>/topics/<int:topic_pk>/', PostListView.as_view(), name='topic_posts'),
+    path('boards/<int:pk>/topics/<int:topic_pk>/reply/', reply_topic, name='reply_topic'),
+    path('boards/<int:pk>/topics/<int:topic_pk>/posts/<int:post_pk>/edit/', PostUpdateView.as_view(), name='edit_post'),
     path('login', views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('signup/', signup, name='signup'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('settings/password/', views.PasswordChangeView.as_view(template_name='accounts/password_change.html'),
-    name='password_change'),
-    path('settings/password/done/', views.PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'),
-    name='password_change_done'),
+    path('settings/password/', views.PasswordChangeView.as_view(template_name='accounts/password_change.html'), name='password_change'),
+    path('settings/password/done/', views.PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'), name='password_change_done'),
+    path('settings/account/', UserUpdateView.as_view(), name='my_account'),
     path('reset/',
         views.PasswordResetView.as_view(
             template_name='accounts/password_reset.html',

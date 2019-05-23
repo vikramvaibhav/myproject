@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # my apps
     'boards.apps.BoardsConfig',
@@ -140,6 +141,8 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = PROJECT_DIR.parent.child('static_cdn', 'media_root')
 MEDIA_URL = '/media/'
+
+TIME_ZONE = 'Asia/Calcutta'
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'home'

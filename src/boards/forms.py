@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from .models import Topic
+from .models import Topic, Post
 
 class NewTopicForm(forms.ModelForm):
     message = forms.CharField(
@@ -19,3 +19,8 @@ class NewTopicForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.add_input(Submit('submit', 'Post'))
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('message',)
