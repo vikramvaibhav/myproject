@@ -5,7 +5,9 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-  <h1 class="text-center logo">Django Boards</h1>
+  <a href="{% url 'boards:home' %}" class="text-decoration-none">
+    <h1 class="text-center logo">Discussion Boards</h1>
+  </a>
   {% block content %}
   {% endblock %}
 </div>

@@ -7,12 +7,12 @@
 {% endblock %}
 
 {% block breadcrumb %}
-{% url 'home' as home_url %}
-<li class="breadcrumb-item {% if request.path == home_url %} active {% endif %}"><a href="{{ home_url }}">Boards</a></li>
+<li class="breadcrumb-item"><a href="{% url 'boards:home' %}">Boards</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="my-3">
+{% if boards %}
   <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -28,7 +28,7 @@
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
       <td>
-        <a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a>
+        <a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}</a>
         <small class="text-muted d-block">{{ board.description }}</small>
       </td>
       <td class="align-middle">{{ board.get_posts_count }}</td>
@@ -37,7 +37,7 @@
         {% with post=board.get_last_post %}
         {% if post %}
         <small>
-          <a href="{% url 'topic_posts' board.pk post.topic.pk %}">
+          <a href="{% url 'boards:topic_posts' board.pk post.topic.pk %}">
             By {{ post.created_by.username }} at {{ post.created_at }}
           </a>
         </small>
@@ -52,5 +52,13 @@
     {% endfor %}
   </tbody>
   </table>
+  {% else %}
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">Welcome!</h4>
+      <p>Nothing to Discuss Here... </p>
+      <hr>
+      <p class="mb-0">Login to <a href="/admin/">Admin</a> and Create Discussion Board, Only Admin can Create Discussion Boards.</p>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}

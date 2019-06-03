@@ -2,11 +2,9 @@
 {% load static %}
 {% block title %}Start a New Topic{% endblock %}
 {% block breadcrumb %}
-{% url 'home' as home_url %}
-{% url 'board_topics' board.pk as boardtopics %}
-<li class="breadcrumb-item {% if request.path == home_url %} active {% endif %}"><a href="{{ home_url }}">Boards</a></li>
-<li class="breadcrumb-item {% if request.path == boardtopics %} active {% endif %}"><a href="{{ boardtopics }}">{{ board.name }}</a></li>
-<li class="breadcrumb-item"><a href="">New Topic</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'boards:home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}</a></li>
+  <li class="breadcrumb-item active">New topic</li>
 {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}

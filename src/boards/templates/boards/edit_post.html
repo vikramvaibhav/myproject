@@ -12,10 +12,10 @@
   </script>
 {% endblock %}
 {% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}</a></li>
-  <li class="breadcrumb-item active">Edit post</li>
+<li class="breadcrumb-item"><a href="{% url 'boards:home' %}">Boards</a></li>
+<li class="breadcrumb-item"><a href="{% url 'boards:board_topics' post.topic.board.pk %}">{{ post.topic.board.name }}</a></li>
+<li class="breadcrumb-item"><a href="{% url 'boards:topic_posts' post.topic.board.pk post.topic.pk %}">{{ post.topic.subject }}</a></li>
+<li class="breadcrumb-item active">Edit post</li>
 {% endblock %}
 {% block content %}
 {% load crispy_forms_tags %}
@@ -23,7 +23,7 @@
   {% csrf_token %}
   {{ form|crispy }}
   <button type="submit" class="btn btn-success">Save changes</button>
-  <a href="{% url 'topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
+  <a href="{% url 'boards:topic_posts' post.topic.board.pk post.topic.pk %}" class="btn btn-outline-secondary" role="button">Cancel</a>
 </form>
 
 {% endblock %}

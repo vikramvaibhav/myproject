@@ -14,28 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views
 
 from django.conf import settings
 from django.conf.urls.static import static
 
-from boards.views import BoardListView, TopicListView, PostListView, PostUpdateView, new_topic, reply_topic
-from accounts.views import signup, UserUpdateView
+from accounts.views import signup
+# from accounts.views import UserUpdateView
 
 urlpatterns = [
-    path('', BoardListView.as_view(), name='home'),
-    path('boards/<int:pk>/', TopicListView.as_view(), name='board_topics'),
-    path('boards/<int:pk>/new/', new_topic, name='new_topic'),
-    path('boards/<int:pk>/topics/<int:topic_pk>/', PostListView.as_view(), name='topic_posts'),
-    path('boards/<int:pk>/topics/<int:topic_pk>/reply/', reply_topic, name='reply_topic'),
-    path('boards/<int:pk>/topics/<int:topic_pk>/posts/<int:post_pk>/edit/', PostUpdateView.as_view(), name='edit_post'),
-    path('login', views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    path('', include('boards.urls', namespace='boards')),
+    path('profile/', include('profiles.urls', namespace='profiles')),
+
     path('signup/', signup, name='signup'),
+    # path('settings/account/', UserUpdateView.as_view(), name='my_account'),
+    path('login/', views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('settings/password/', views.PasswordChangeView.as_view(template_name='accounts/password_change.html'), name='password_change'),
     path('settings/password/done/', views.PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'), name='password_change_done'),
-    path('settings/account/', UserUpdateView.as_view(), name='my_account'),
     path('reset/',
         views.PasswordResetView.as_view(
             template_name='accounts/password_reset.html',

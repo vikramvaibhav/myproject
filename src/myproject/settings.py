@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # my apps
     'boards.apps.BoardsConfig',
     'accounts.apps.AccountsConfig',
+    'profiles.apps.ProfilesConfig',
     'crispy_forms',
 ]
 
@@ -145,6 +146,6 @@ MEDIA_URL = '/media/'
 TIME_ZONE = 'Asia/Calcutta'
 
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'boards:home'
+LOGIN_REDIRECT_URL = 'boards:home'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
